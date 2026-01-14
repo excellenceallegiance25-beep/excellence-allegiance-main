@@ -1,0 +1,244 @@
+/* client/src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS Variables */
+:root {
+  --primary: #3b82f6;    /* Blue-500 */
+  --accent: #f59e0b;     /* Amber-500 */
+  --secondary: #10b981;  /* Green-500 */
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    @apply bg-gray-50 text-gray-900;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-amber-500 hover:bg-amber-600 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 shadow-lg hover:shadow-xl;
+  }
+  
+  .btn-secondary {
+    @apply bg-transparent hover:bg-white text-white hover:text-blue-600 border-2 border-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 hover:-translate-y-1;
+  }
+  
+  .section-padding {
+    @apply py-20 px-4;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+  
+  .feature-card {
+    @apply bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100;
+  }
+  
+  .form-input {
+    @apply w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors duration-300;
+  }
+
+  .whatsapp-button {
+    @apply fixed bottom-20 right-6 z-[9999];
+  }
+
+  .ai-chatbot {
+    @apply fixed bottom-32 right-6 z-[9998];
+  }
+
+  .floating-btn {
+    @apply animate-float;
+  }
+
+  .content-wrapper {
+    @apply pb-32;
+  }
+}
+
+/* Custom Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes ping-delayed {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  70%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-ping-delayed {
+  animation: ping-delayed 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  animation-delay: 1s;
+}
+
+/* Custom Styles */
+.whatsapp-button a, .ai-chatbot div {
+  transition: all 0.3s ease-in-out;
+}
+
+.whatsapp-button a:hover, .ai-chatbot div:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Tooltip styles */
+.whatsapp-button::after,
+.ai-chatbot::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.whatsapp-button:hover::after,
+.ai-chatbot:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .whatsapp-button {
+    bottom: 4rem;
+    right: 1rem;
+  }
+  
+  .ai-chatbot {
+    bottom: 8rem;
+    right: 1rem;
+  }
+
+  .whatsapp-button a {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .ai-chatbot div {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .whatsapp-button svg,
+  .ai-chatbot svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .whatsapp-button {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+  
+  .ai-chatbot {
+    bottom: 6rem;
+    right: 1.5rem;
+  }
+}
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-ping-delayed {
+    animation: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .whatsapp-button,
+  .ai-chatbot {
+    display: none;
+  }
+}
+
+/* Dark Mode Scrollbar */
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-track {
+    background: #2d3748;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #4a5568;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #718096;
+  }
+}
+
+/* Loading Shimmer */
+.loading-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
