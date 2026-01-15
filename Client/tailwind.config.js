@@ -1,4 +1,4 @@
-// client/tailwind.config.js
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -7,10 +7,9 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        primary: '#3b82f6',    // Blue-500
-        accent: '#f59e0b',     // Amber-500
-        secondary: '#10b981',  // Green-500
+      colors: {// Blue-500
+        accent: '#f59e0b',     
+        secondary: '#10b981', 
       },
       animation: {
         float: 'float 3s ease-in-out infinite',

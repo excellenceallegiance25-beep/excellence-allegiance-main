@@ -1,4 +1,4 @@
-// src/App.jsx - COMPLETE UPDATED VERSION
+// src/App.jsx
 import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
@@ -15,7 +15,7 @@ import About from "./pages/AboutPage";
 import Services from "./pages/Ourservice";
 import Contact from "./pages/ContactPage";
 import FAQ from "./pages/FAQPage";
-
+import TestPage from "./pages/TestPage";
 import CookiePolicy from "./pages/CookiePolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
@@ -29,8 +29,10 @@ import WhatsAppButton from "./components/WhatsAppButton";
 
 // Auth Pages
 import LoginPage from "./pages/auth/LoginPage";
-import RegisterPage from "./pages/auth/RegisterPage";
-import VerifyOTPPage from "./pages/auth/VerifyOTPPage";
+import RegisterEmployee from "./pages/auth/RegisterEmployee";
+import RegisterManager from "./pages/auth/RegisterManager";
+import RegisterAdmin from "./pages/auth/RegisterAdmin";
+import VerifyEmail from "./pages/auth/VerifyEmail";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 
 // Profile Pages
@@ -171,6 +173,58 @@ const DashboardRouter = () => {
   }
 };
 
+// Register Selection Page
+const RegisterSelection = () => (
+  <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md">
+      <div>
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          Choose Registration Type
+        </h2>
+        <p className="mt-2 text-center text-sm text-gray-600">
+          Select your role to register
+        </p>
+      </div>
+      <div className="space-y-4">
+        <a
+          href="/register/employee"
+          className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+        >
+          Register as Employee
+        </a>
+        <a
+          href="/register/manager"
+          className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+        >
+          Register as Manager
+        </a>
+        <a
+          href="/register/admin"
+          className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+        >
+          Register as Admin
+        </a>
+      </div>
+      <div className="text-center">
+        <p className="text-sm text-gray-600">
+          Already have an account?{" "}
+          <a
+            href="/login"
+            className="font-medium text-blue-600 hover:text-blue-500"
+          >
+            Sign in
+          </a>
+        </p>
+        <div className="mt-4">
+          <a href="/" className="text-sm text-gray-500 hover:text-gray-700">
+            ← Back to Home
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 // Unauthorized Page
 const UnauthorizedPage = () => (
   <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-red-50 to-pink-50 pt-20">
@@ -214,11 +268,11 @@ const AppLayout = ({ children }) => {
   const { user } = useAuth();
   const location = useLocation();
 
-  // Don't show Navbar on login/register pages or dashboard pages
+  // Don't show Navbar on auth pages
   const hideNavbar =
     location.pathname.startsWith("/login") ||
     location.pathname.startsWith("/register") ||
-    location.pathname.startsWith("/verify-otp") ||
+    location.pathname.startsWith("/verify-email") ||
     location.pathname.startsWith("/forgot-password") ||
     location.pathname.startsWith("/employee/") ||
     location.pathname.startsWith("/manager/") ||
@@ -231,7 +285,10 @@ const AppLayout = ({ children }) => {
 
       <main className="flex-grow">{children}</main>
 
-      
+      {/* Show Footer only on public pages */}
+      {!hideNavbar && <Footer />}
+
+      {/* Chatbot and WhatsApp */}
       <AIChatbot />
       <WhatsAppButton />
     </div>
@@ -260,8 +317,11 @@ function App() {
 
             {/* Auth Routes - No Navbar on these */}
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/verify-otp" element={<VerifyOTPPage />} />
+            <Route path="/register" element={<RegisterSelection />} />
+            <Route path="/register/employee" element={<RegisterEmployee />} />
+            <Route path="/register/manager" element={<RegisterManager />} />
+            <Route path="/register/admin" element={<RegisterAdmin />} />
+            <Route path="/verify-email" element={<VerifyEmail />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
             {/* Profile Routes */}
@@ -282,7 +342,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-
+            <Route path="/test" element={<TestPage />} />
             {/* Dashboard Main Routes */}
             <Route path="/dashboard" element={<DashboardRouter />} />
 

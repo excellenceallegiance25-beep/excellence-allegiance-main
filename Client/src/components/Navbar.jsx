@@ -51,7 +51,7 @@ const Navbar = () => {
               />
             </div>
 
-            {/* কোম্পানি নাম */}
+           
             <div className="text-white font-bold">
               <h2 className="text-lg md:text-xl leading-tight">
                 EXCELLENCE ALLEGIENCE
@@ -62,7 +62,7 @@ const Navbar = () => {
             </div>
           </Link>
 
-          {/* ডেস্কটপ মেনু - Right Side */}
+         
           <div className="hidden md:flex items-center space-x-8">
             <Link
               to="/"
@@ -100,7 +100,7 @@ const Navbar = () => {
             >
               Our Service
               {location.pathname === "/services" && (
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600"></span>
+                <span className="absolute bottom-0 left-0 w-full h-0.5"></span>
               )}
             </Link>
 
@@ -113,14 +113,14 @@ const Navbar = () => {
               </Link>
               <Link
                 to="/register"
-                className="px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 hover:scale-105 bg-blue-600 text-white hover:bg-blue-700 shadow-md"
+                className="px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 hover:scale-105 text-white hover:bg-blue-700 shadow-md"
               >
                 Register
               </Link>
             </div>
           </div>
 
-          {/* মোবাইল মেনু বাটন */}
+         
           <div className="md:hidden flex items-center space-x-3">
             <Link
               to="/login"
@@ -131,7 +131,7 @@ const Navbar = () => {
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="focus:outline-none transition-all duration-300 text-white hover:text-blue-600"
+              className="focus:outline-none transition-all duration-300 text-white"
             >
               <svg
                 className="h-6 w-6"
@@ -159,7 +159,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* মোবাইল মেনু */}
+       
         {isOpen && (
           <div className="md:hidden bg-black/90 border-t border-gray-700 py-4">
             <div className="flex flex-col space-y-4">

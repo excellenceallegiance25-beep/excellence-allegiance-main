@@ -885,7 +885,7 @@ Please ask about any of these companies, or use the quick action buttons below f
                 <div>
                   <h3 className="font-bold text-white">EAPL Assistant</h3>
                   <div className="flex items-center">
-                    <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+                    <div className="w-2 h-2 bg-green-700 rounded-full mr-2 animate-pulse"></div>
                     <p className="text-xs text-blue-100">Online</p>
                   </div>
                 </div>

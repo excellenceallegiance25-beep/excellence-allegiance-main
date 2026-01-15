@@ -26,7 +26,7 @@ const ManagerDashboard = () => {
         setLoading(true);
         try {
             const token = localStorage.getItem('token');
-            // Mock data - Replace with actual API call
+            
             setTimeout(() => {
                 setTeamMembers([
                     { id: 1, name: 'John Smith', position: 'Senior Developer', status: 'active', performance: 95 },
@@ -44,13 +44,7 @@ const ManagerDashboard = () => {
                 setLoading(false);
             }, 1000);
             
-            // Uncomment for actual API call:
-            // const response = await axios.get('http://localhost:5000/api/manager/dashboard', {
-            //     headers: { Authorization: `Bearer ${token}` }
-            // });
-            // setTeamStats(response.data.stats);
-            // setTeamMembers(response.data.teamMembers);
-            // setProjectProgress(response.data.projects);
+            
             
         } catch (error) {
             console.error('Error fetching manager data:', error);
@@ -115,7 +109,7 @@ const ManagerDashboard = () => {
                 </div>
             </div>
 
-            {/* Stats Grid */}
+            
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {statCards.map((stat, index) => (
                     <div key={index} className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-5 shadow-lg border border-gray-200">
@@ -132,7 +126,7 @@ const ManagerDashboard = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Team Members */}
+                
                 <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
                     <div className="flex justify-between items-center mb-6">
                         <h3 className="text-xl font-bold text-gray-800">Team Members</h3>
@@ -166,7 +160,7 @@ const ManagerDashboard = () => {
                     </div>
                 </div>
 
-                {/* Project Progress */}
+               
                 <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
                     <div className="flex justify-between items-center mb-6">
                         <h3 className="text-xl font-bold text-gray-800">Project Progress</h3>
@@ -197,7 +191,7 @@ const ManagerDashboard = () => {
                 </div>
             </div>
 
-            {/* Quick Actions */}
+           
             <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
                 <h3 className="text-xl font-bold text-gray-800 mb-6">Quick Actions</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
