@@ -61,7 +61,7 @@ const CalendarPage = ({ role }) => {
   const todayEvents = events.filter((event) => event.date === today);
 
   // API Base URL
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+  const API_URL = import.meta.env.VITE_API_URL || "http://192.168.68.109:5000/api";
 
   // Load events from localStorage on initial load
   useEffect(() => {

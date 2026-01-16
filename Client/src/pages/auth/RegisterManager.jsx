@@ -41,7 +41,7 @@ const RegisterManager = () => {
 
     try {
       const apiUrl =
-        import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+        import.meta.env.VITE_API_URL || "http://192.168.68.109:5000/api";
       const res = await axios.post(`${apiUrl}/auth/register/manager`, {
         name: formData.name,
         email: formData.email,

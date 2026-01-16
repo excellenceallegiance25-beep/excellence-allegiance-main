@@ -43,7 +43,7 @@ const RegisterEmployee = () => {
 
     try {
       // Use the correct API endpoint
-      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+      const apiUrl = import.meta.env.VITE_API_URL || "http://192.168.68.109:5000";
 
       console.log(
         "Sending request to:",
@@ -141,7 +141,7 @@ const RegisterEmployee = () => {
         {/* Debug Info (remove in production) */}
         <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 p-3 rounded text-sm">
           <strong>Debug Info:</strong> API URL:{" "}
-          {import.meta.env.VITE_API_URL || "http://localhost:5000"}
+          {import.meta.env.VITE_API_URL || "http://192.168.68.109:5000"}
         </div>
 
         {error && (

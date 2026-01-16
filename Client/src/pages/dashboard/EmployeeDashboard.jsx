@@ -37,7 +37,7 @@ const EmployeeDashboard = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "http://localhost:5000/api/employee/dashboard",
+        "http://192.168.68.109:5000/api/employee/dashboard",
         {
           headers: {
             Authorization: `Bearer ${token}`,

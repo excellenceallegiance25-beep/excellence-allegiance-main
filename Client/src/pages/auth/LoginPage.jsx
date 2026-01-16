@@ -17,7 +17,7 @@ const LoginPage = ({ login }) => {
 
     try {
       const apiUrl =
-        import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+        import.meta.env.VITE_API_URL || "http://192.168.68.109:5000/api";
       const res = await axios.post(`${apiUrl}/auth/login`, { email, password });
 
       if (res.data.success) {
@@ -50,7 +50,7 @@ const LoginPage = ({ login }) => {
   const resendVerification = async () => {
     try {
       const apiUrl =
-        import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+        import.meta.env.VITE_API_URL || "http://192.168.68.109:5000/api";
       await axios.post(`${apiUrl}/auth/resend-verification`, { email });
       setError("Verification email sent! Please check your inbox.");
     } catch (err) {

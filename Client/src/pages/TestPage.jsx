@@ -9,7 +9,7 @@ const TestPage = () => {
   const testBackend = async () => {
     setLoading(true);
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+      const apiUrl = import.meta.env.VITE_API_URL || "http://192.168.68.109:5000";
       const response = await axios.get(`${apiUrl}/api/test`);
       setResult(JSON.stringify(response.data, null, 2));
     } catch (error) {
@@ -28,7 +28,7 @@ const TestPage = () => {
   const testRegistration = async () => {
     setLoading(true);
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+      const apiUrl = import.meta.env.VITE_API_URL || "http://192.168.68.109:5000";
       const response = await axios.post(
         `${apiUrl}/api/auth/register/employee`,
         {

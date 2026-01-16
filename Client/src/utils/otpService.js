@@ -91,7 +91,7 @@ export const sendOTPViaEmail = async (email, otp) => {
     console.log(`📧 OTP: ${otp}`);
     
     // Call your backend API to send real email
-    const response = await fetch('http://localhost:10000/api/auth/send-otp-email', {
+    const response = await fetch('http://192.168.68.109:10000/api/auth/send-otp-email', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -132,7 +132,7 @@ export const sendOTPViaSMS = async (phone, otp) => {
     console.log(`📱 OTP: ${otp}`);
     
     // Call your backend API to send real SMS
-    const response = await fetch('http://localhost:10000/api/auth/send-otp-sms', {
+    const response = await fetch('http://192.168.68.109:10000/api/auth/send-otp-sms', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
