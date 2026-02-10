@@ -21,7 +21,7 @@ const VerifyEmail = () => {
 
       try {
         const apiUrl =
-          import.meta.env.VITE_API_URL || "http://192.168.68.109:5000/api";
+          import.meta.env.VITE_API_URL || "http://192.168.68.106:5000/api";
         const res = await axios.get(`${apiUrl}/auth/verify-email/${token}`);
 
         if (res.data.success) {

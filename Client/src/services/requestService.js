@@ -1,7 +1,7 @@
 // client/src/services/requestService.js
 
 // API URL
-const API_BASE_URL = 'http://192.168.68.109:5000/api';
+const API_BASE_URL = 'http://192.168.68.106:5000/api';
 
 // API request helper
 const apiRequest = async (endpoint, options = {}) => {

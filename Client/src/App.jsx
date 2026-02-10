@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
@@ -20,6 +19,9 @@ import CookiePolicy from "./pages/CookiePolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 
+
+import AdminDashboard from "./pages/admin/AdminDashboard";
+
 // Components
 import Testimonials from "./components/Testimonials";
 import Navbar from "./components/Navbar";
@@ -29,9 +31,7 @@ import WhatsAppButton from "./components/WhatsAppButton";
 
 // Auth Pages
 import LoginPage from "./pages/auth/LoginPage";
-import RegisterEmployee from "./pages/auth/RegisterEmployee";
-import RegisterManager from "./pages/auth/RegisterManager";
-import RegisterAdmin from "./pages/auth/RegisterAdmin";
+import RegisterPage from "./pages/auth/RegisterPage";
 import VerifyEmail from "./pages/auth/VerifyEmail";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 
@@ -42,7 +42,6 @@ import ProfileSetupPage from "./pages/profile/ProfileSetupPage";
 // Dashboard Main Pages
 import EmployeeDashboard from "./pages/dashboard/EmployeeDashboard";
 import ManagerDashboard from "./pages/dashboard/ManagerDashboard";
-import AdminDashboard from "./pages/dashboard/AdminDashboard";
 
 // Dashboard Sub Pages - Employee
 import EmployeeProjects from "./pages/dashboard/EmployeeProjects";
@@ -63,13 +62,6 @@ import ManagerReports from "./pages/dashboard/ManagerReports";
 import ManagerApprovals from "./pages/dashboard/ManagerApprovals";
 import ManagerPerformance from "./pages/dashboard/ManagerPerformance";
 
-// Dashboard Sub Pages - Admin
-import AdminUsers from "./pages/dashboard/AdminUsers";
-import AdminAnalytics from "./pages/dashboard/AdminAnalytics";
-import AdminSettings from "./pages/dashboard/AdminSettings";
-import AdminDatabase from "./pages/dashboard/AdminDatabase";
-import AdminAudit from "./pages/dashboard/AdminAudit";
-
 // Common Dashboard Pages
 import ProfilePage from "./pages/profile/ProfilePage";
 import NotificationsPage from "./pages/profile/NotificationsPage";
@@ -79,6 +71,9 @@ import SecurityPage from "./pages/profile/SecurityPage";
 
 // Request Pages
 import CreateProject from "./pages/CreateProject";
+
+// API Configuration
+export const API_URL = "http://localhost:5000/api";
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -112,7 +107,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
 
   // Check if profile is completed (only for employees)
   if (
-    user.role === "employee" &&
+    (user.role === "employee" || user.role === "user") &&
     !user.profileCompleted &&
     !window.location.pathname.includes("/profile/setup")
   ) {
@@ -120,6 +115,58 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   }
 
   if (allowedRoles && !allowedRoles.includes(user.role)) {
+    return <Navigate to="/unauthorized" replace />;
+  }
+
+  return children;
+};
+
+// Admin Protected Route
+const AdminProtectedRoute = ({ children }) => {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <Navigate to="/admin/login" replace />;
+  }
+
+  if (user.role !== "admin" && user.role !== "super_admin") {
+    return <Navigate to="/unauthorized" replace />;
+  }
+
+  return children;
+};
+
+// Manager Protected Route
+const ManagerProtectedRoute = ({ children }) => {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (user.role !== "manager") {
     return <Navigate to="/unauthorized" replace />;
   }
 
@@ -155,13 +202,14 @@ const DashboardRouter = () => {
   }
 
   // Check profile completion for employees
-  if (user.role === "employee" && !user.profileCompleted) {
+  if ((user.role === "employee" || user.role === "user") && !user.profileCompleted) {
     return <Navigate to="/profile/setup" replace />;
   }
 
   // Redirect to role-specific dashboard
   switch (user.role) {
     case "admin":
+    case "super_admin":
       return <Navigate to="/admin/dashboard" replace />;
     case "manager":
       return <Navigate to="/manager/dashboard" replace />;
@@ -172,58 +220,6 @@ const DashboardRouter = () => {
       return <Navigate to="/unauthorized" replace />;
   }
 };
-
-// Register Selection Page
-const RegisterSelection = () => (
-  <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-    <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md">
-      <div>
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Choose Registration Type
-        </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
-          Select your role to register
-        </p>
-      </div>
-      <div className="space-y-4">
-        <a
-          href="/register/employee"
-          className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-        >
-          Register as Employee
-        </a>
-        <a
-          href="/register/manager"
-          className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-        >
-          Register as Manager
-        </a>
-        <a
-          href="/register/admin"
-          className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-        >
-          Register as Admin
-        </a>
-      </div>
-      <div className="text-center">
-        <p className="text-sm text-gray-600">
-          Already have an account?{" "}
-          <a
-            href="/login"
-            className="font-medium text-blue-600 hover:text-blue-500"
-          >
-            Sign in
-          </a>
-        </p>
-        <div className="mt-4">
-          <a href="/" className="text-sm text-gray-500 hover:text-gray-700">
-            ← Back to Home
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-);
 
 // Unauthorized Page
 const UnauthorizedPage = () => (
@@ -276,7 +272,8 @@ const AppLayout = ({ children }) => {
     location.pathname.startsWith("/forgot-password") ||
     location.pathname.startsWith("/employee/") ||
     location.pathname.startsWith("/manager/") ||
-    location.pathname.startsWith("/admin/");
+    location.pathname.startsWith("/admin/") ||
+    location.pathname === "/admin/login";
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -308,7 +305,6 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/faq" element={<FAQ />} />
-
             <Route path="/cookie-policy" element={<CookiePolicy />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
@@ -317,12 +313,20 @@ function App() {
 
             {/* Auth Routes - No Navbar on these */}
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterSelection />} />
-            <Route path="/register/employee" element={<RegisterEmployee />} />
-            <Route path="/register/manager" element={<RegisterManager />} />
-            <Route path="/register/admin" element={<RegisterAdmin />} />
+            <Route path="/register" element={<RegisterPage />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+
+            {/* Admin Routes */}
+            
+            <Route
+              path="/admin/dashboard"
+              element={
+                <AdminProtectedRoute>
+                  <AdminDashboard />
+                </AdminProtectedRoute>
+              }
+            />
 
             {/* Profile Routes */}
             <Route path="/profile" element={<ProfileRoute />} />
@@ -342,7 +346,9 @@ function App() {
                 </ProtectedRoute>
               }
             />
+
             <Route path="/test" element={<TestPage />} />
+
             {/* Dashboard Main Routes */}
             <Route path="/dashboard" element={<DashboardRouter />} />
 
@@ -472,163 +478,115 @@ function App() {
             <Route
               path="/manager/dashboard"
               element={
-                <ProtectedRoute allowedRoles={["manager"]}>
+                <ManagerProtectedRoute>
                   <ManagerDashboard />
-                </ProtectedRoute>
+                </ManagerProtectedRoute>
               }
             />
             <Route
               path="/manager/team"
               element={
-                <ProtectedRoute allowedRoles={["manager"]}>
+                <ManagerProtectedRoute>
                   <ManagerTeam />
-                </ProtectedRoute>
+                </ManagerProtectedRoute>
               }
             />
             <Route
               path="/manager/projects"
               element={
-                <ProtectedRoute allowedRoles={["manager"]}>
+                <ManagerProtectedRoute>
                   <ManagerProjects />
-                </ProtectedRoute>
+                </ManagerProtectedRoute>
               }
             />
             <Route
               path="/manager/reports"
               element={
-                <ProtectedRoute allowedRoles={["manager"]}>
+                <ManagerProtectedRoute>
                   <ManagerReports />
-                </ProtectedRoute>
+                </ManagerProtectedRoute>
               }
             />
             <Route
               path="/manager/approvals"
               element={
-                <ProtectedRoute allowedRoles={["manager"]}>
+                <ManagerProtectedRoute>
                   <ManagerApprovals />
-                </ProtectedRoute>
+                </ManagerProtectedRoute>
               }
             />
             <Route
               path="/manager/performance"
               element={
-                <ProtectedRoute allowedRoles={["manager"]}>
+                <ManagerProtectedRoute>
                   <ManagerPerformance />
-                </ProtectedRoute>
+                </ManagerProtectedRoute>
               }
             />
             <Route
               path="/manager/profile"
               element={
-                <ProtectedRoute allowedRoles={["manager"]}>
+                <ManagerProtectedRoute>
                   <ProfilePage role="manager" />
-                </ProtectedRoute>
+                </ManagerProtectedRoute>
               }
             />
             <Route
               path="/manager/notifications"
               element={
-                <ProtectedRoute allowedRoles={["manager"]}>
+                <ManagerProtectedRoute>
                   <NotificationsPage role="manager" />
-                </ProtectedRoute>
+                </ManagerProtectedRoute>
               }
             />
             <Route
               path="/manager/calendar"
               element={
-                <ProtectedRoute allowedRoles={["manager"]}>
+                <ManagerProtectedRoute>
                   <CalendarPage role="manager" />
-                </ProtectedRoute>
+                </ManagerProtectedRoute>
               }
             />
             <Route
               path="/manager/security"
               element={
-                <ProtectedRoute allowedRoles={["manager"]}>
+                <ManagerProtectedRoute>
                   <SecurityPage role="manager" />
-                </ProtectedRoute>
+                </ManagerProtectedRoute>
               }
             />
 
-            {/* Admin Routes */}
-            <Route
-              path="/admin/dashboard"
-              element={
-                <ProtectedRoute allowedRoles={["admin"]}>
-                  <AdminDashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/admin/users"
-              element={
-                <ProtectedRoute allowedRoles={["admin"]}>
-                  <AdminUsers />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/admin/analytics"
-              element={
-                <ProtectedRoute allowedRoles={["admin"]}>
-                  <AdminAnalytics />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/admin/settings"
-              element={
-                <ProtectedRoute allowedRoles={["admin"]}>
-                  <AdminSettings />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/admin/database"
-              element={
-                <ProtectedRoute allowedRoles={["admin"]}>
-                  <AdminDatabase />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/admin/audit"
-              element={
-                <ProtectedRoute allowedRoles={["admin"]}>
-                  <AdminAudit />
-                </ProtectedRoute>
-              }
-            />
+            {/* Admin Routes - Using AdminDashboard only */}
             <Route
               path="/admin/profile"
               element={
-                <ProtectedRoute allowedRoles={["admin"]}>
+                <AdminProtectedRoute>
                   <ProfilePage role="admin" />
-                </ProtectedRoute>
+                </AdminProtectedRoute>
               }
             />
             <Route
               path="/admin/notifications"
               element={
-                <ProtectedRoute allowedRoles={["admin"]}>
+                <AdminProtectedRoute>
                   <NotificationsPage role="admin" />
-                </ProtectedRoute>
+                </AdminProtectedRoute>
               }
             />
             <Route
               path="/admin/calendar"
               element={
-                <ProtectedRoute allowedRoles={["admin"]}>
+                <AdminProtectedRoute>
                   <CalendarPage role="admin" />
-                </ProtectedRoute>
+                </AdminProtectedRoute>
               }
             />
             <Route
               path="/admin/security"
               element={
-                <ProtectedRoute allowedRoles={["admin"]}>
+                <AdminProtectedRoute>
                   <SecurityPage role="admin" />
-                </ProtectedRoute>
+                </AdminProtectedRoute>
               }
             />
 
@@ -636,7 +594,7 @@ function App() {
             <Route
               path="/projects/new"
               element={
-                <ProtectedRoute allowedRoles={["employee", "user"]}>
+                <ProtectedRoute allowedRoles={["employee", "user", "manager", "admin", "super_admin"]}>
                   <CreateProject />
                 </ProtectedRoute>
               }

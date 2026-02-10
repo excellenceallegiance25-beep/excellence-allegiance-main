@@ -476,12 +476,7 @@ const Testimonials = () => {
         {/* Trusted By Section with Infinite Slider */}
         <div className="mt-24">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-6 py-2 bg-gray-900/20 backdrop-blur-sm rounded-full mb-6 border border-gray-700/50">
-              <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-cyan-300 tracking-wider">
-                TRUSTED BY INDUSTRY LEADERS
-              </span>
-            </div>
+            
           </div>
 
           {/* Infinite Slider Container */}

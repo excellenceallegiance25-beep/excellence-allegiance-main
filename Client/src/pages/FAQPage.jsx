@@ -1,9 +1,69 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 
 const FAQPage = () => {
   const [activeIndex, setActiveIndex] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  const HeroSkeleton = () => (
+    <section className="pt-32 pb-20 bg-gradient-to-br from-gray-700 to-gray-900 text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center">
+          <div className="w-48 h-16 bg-gray-600 rounded-lg mx-auto mb-6 animate-pulse"></div>
+          <div className="w-3/4 h-8 bg-gray-600 rounded-lg mx-auto animate-pulse"></div>
+        </div>
+      </div>
+    </section>
+  );
+
+  const FAQCategorySkeleton = () => (
+    <div className="bg-gray-800 rounded-2xl shadow-lg p-8 animate-pulse">
+      <div className="w-64 h-10 bg-gray-700 rounded-lg mx-auto mb-8"></div>
+      <div className="space-y-4">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="border border-gray-700 rounded-lg overflow-hidden">
+            <div className="w-full px-6 py-4">
+              <div className="w-3/4 h-6 bg-gray-700 rounded mb-2"></div>
+              <div className="w-1/2 h-4 bg-gray-700 rounded"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  const FAQItemSkeleton = () => (
+    <div className="border border-gray-300 rounded-lg overflow-hidden bg-gray-800">
+      <div className="w-full px-6 py-4 flex justify-between items-center">
+        <div className="flex-1">
+          <div className="w-3/4 h-6 bg-gray-700 rounded mb-2"></div>
+          <div className="w-1/2 h-4 bg-gray-700 rounded"></div>
+        </div>
+        <div className="w-8 h-8 bg-gray-700 rounded-full"></div>
+      </div>
+    </div>
+  );
+
+  const CtaSkeleton = () => (
+    <div className="mt-16 text-center animate-pulse">
+      <div className="bg-gradient-to-r from-gray-700 to-gray-800 rounded-2xl p-12">
+        <div className="w-64 h-10 bg-gray-600 rounded-lg mx-auto mb-4"></div>
+        <div className="w-3/4 h-6 bg-gray-600 rounded mx-auto mb-8"></div>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="w-48 h-14 bg-gray-600 rounded-xl"></div>
+          <div className="w-40 h-14 bg-gray-600 rounded-xl"></div>
+        </div>
+      </div>
+    </div>
+  );
 
   const faqData = [
     {
@@ -63,6 +123,29 @@ const FAQPage = () => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-900">
+        <Navbar />
+        
+     
+        <HeroSkeleton />
+        <section className="py-20 bg-gray-800">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="space-y-12">
+              {[1, 2, 3].map((i) => (
+                <FAQCategorySkeleton key={i} />
+              ))}
+            </div>
+            
+            
+            <CtaSkeleton />
+          </div>
+        </section>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
@@ -78,8 +161,6 @@ const FAQPage = () => {
           </div>
         </div>
       </section>
-
-    
       <section className="py-20 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-12">
@@ -130,8 +211,6 @@ const FAQPage = () => {
               </div>
             ))}
           </div>
-
-          
           <div className="mt-16 text-center">
             <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-white">
               <h3 className="text-3xl font-bold mb-4">Still have questions?</h3>
@@ -156,8 +235,6 @@ const FAQPage = () => {
           </div>
         </div>
       </section>
-
-      
     </div>
   );
 };

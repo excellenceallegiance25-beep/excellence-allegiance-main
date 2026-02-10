@@ -1,7 +1,7 @@
 // client/src/services/authService.js
 import axios from "axios";
 
-const API_URL = "http://192.168.68.109:5000/api";
+const API_URL = "http://192.168.68.106:5000/api";
 
 // Create axios instance
 const api = axios.create({

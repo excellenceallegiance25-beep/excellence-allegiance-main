@@ -1,26 +1,31 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+import React from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import LoadingSpinner from "./LoadingSpinner";
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
-  const token = localStorage.getItem('token');
-  const user = JSON.parse(localStorage.getItem('user') || '{}');
-  
-  if (!token) {
-    return <Navigate to="/login" replace />;
+  const { user, loading, isAuthenticated } = useAuth();
+  const location = useLocation();
+
+  if (loading) {
+    return <LoadingSpinner />;
   }
-  
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
 
   if (allowedRoles && !allowedRoles.includes(user.role)) {
-  
-    switch(user.role) {
-      case 'admin':
-        return <Navigate to="/admin-dashboard" replace />;
-      case 'manager':
-        return <Navigate to="/manager-dashboard" replace />;
-      case 'employee':
-        return <Navigate to="/employee-dashboard" replace />;
+    // Redirect based on role
+    switch (user.role) {
+      case "employee":
+        return <Navigate to="/employee/dashboard" replace />;
+      case "manager":
+        return <Navigate to="/manager/dashboard" replace />;
+      case "admin":
+        return <Navigate to="/admin/dashboard" replace />;
       default:
-        return <Navigate to="/" replace />;
+        return <Navigate to="/login" replace />;
     }
   }
 

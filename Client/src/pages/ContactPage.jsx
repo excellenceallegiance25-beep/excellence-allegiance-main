@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const ContactPage = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -8,6 +9,83 @@ const ContactPage = () => {
     company: "",
     message: "",
   });
+
+  useEffect(() => {
+    // Simulate data loading
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Skeleton Components
+  const HeroSectionSkeleton = () => (
+    <section className="pt-32 pb-20 relative overflow-hidden">
+      <div className="absolute inset-0 z-0 bg-gray-800"></div>
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center">
+          <div className="w-3/4 h-12 bg-gray-700 rounded-lg mx-auto mb-6 animate-pulse"></div>
+          <div className="w-1/2 h-8 bg-gray-700 rounded-lg mx-auto mb-8 animate-pulse"></div>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <div className="w-48 h-12 bg-gray-700 rounded-lg animate-pulse"></div>
+            <div className="w-48 h-12 bg-gray-700 rounded-lg animate-pulse"></div>
+            <div className="w-48 h-12 bg-gray-700 rounded-lg animate-pulse"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+
+  const FormInputSkeleton = () => (
+    <div>
+      <div className="w-24 h-4 bg-gray-300 rounded mb-2 animate-pulse"></div>
+      <div className="w-full h-12 bg-gray-200 rounded-lg animate-pulse"></div>
+    </div>
+  );
+
+  const TextareaSkeleton = () => (
+    <div>
+      <div className="w-20 h-4 bg-gray-300 rounded mb-2 animate-pulse"></div>
+      <div className="w-full h-36 bg-gray-200 rounded-lg animate-pulse"></div>
+    </div>
+  );
+
+  const ButtonSkeleton = () => (
+    <div className="w-full h-14 bg-gradient-to-r from-gray-300 to-gray-400 rounded-lg animate-pulse"></div>
+  );
+
+  const ContactCardSkeleton = () => (
+    <div className="flex items-start p-6 bg-white rounded-2xl shadow-lg">
+      <div className="w-12 h-12 bg-gray-200 rounded-xl mr-4 animate-pulse"></div>
+      <div className="flex-1">
+        <div className="w-32 h-6 bg-gray-300 rounded mb-2 animate-pulse"></div>
+        <div className="w-48 h-4 bg-gray-200 rounded mb-1 animate-pulse"></div>
+        <div className="w-64 h-3 bg-gray-200 rounded animate-pulse"></div>
+      </div>
+    </div>
+  );
+
+  const MapSkeleton = () => (
+    <div className="bg-white p-6 rounded-2xl shadow-lg">
+      <div className="flex items-center justify-between mb-4">
+        <div className="w-32 h-6 bg-gray-300 rounded animate-pulse"></div>
+        <div className="w-20 h-6 bg-gray-300 rounded animate-pulse"></div>
+      </div>
+      <div className="h-64 bg-gray-200 rounded-lg animate-pulse"></div>
+      <div className="mt-4 p-3 bg-gray-100 rounded-lg">
+        <div className="w-full h-4 bg-gray-300 rounded animate-pulse"></div>
+      </div>
+    </div>
+  );
+
+  const EmergencyCardSkeleton = () => (
+    <div className="bg-gradient-to-r from-gray-400 to-gray-500 rounded-2xl p-6">
+      <div className="w-48 h-6 bg-gray-300 rounded mb-2 animate-pulse"></div>
+      <div className="w-40 h-4 bg-gray-300 rounded mb-4 animate-pulse"></div>
+      <div className="w-48 h-12 bg-gray-300 rounded-lg animate-pulse"></div>
+    </div>
+  );
 
   const handleChange = (e) => {
     setFormData({
@@ -60,6 +138,59 @@ const ContactPage = () => {
     },
   ];
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-white">
+        <HeroSectionSkeleton />
+        
+        <section className="pt-24 pb-20 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              {/* Left Column - Contact Form Skeleton */}
+              <div className="bg-white p-8 rounded-2xl shadow-lg">
+                <div className="w-48 h-8 bg-gray-300 rounded mb-2 animate-pulse"></div>
+                <div className="w-64 h-4 bg-gray-300 rounded mb-6 animate-pulse"></div>
+                
+                <div className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <FormInputSkeleton />
+                    <FormInputSkeleton />
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <FormInputSkeleton />
+                    <FormInputSkeleton />
+                  </div>
+                  
+                  <TextareaSkeleton />
+                  <ButtonSkeleton />
+                </div>
+              </div>
+
+              {/* Right Column - Contact Info Skeleton */}
+              <div className="space-y-8">
+                <div>
+                  <div className="w-64 h-8 bg-gray-300 rounded mb-6 animate-pulse"></div>
+                  <div className="w-full h-4 bg-gray-300 rounded mb-2 animate-pulse"></div>
+                  <div className="w-3/4 h-4 bg-gray-300 rounded animate-pulse"></div>
+                </div>
+
+                <div className="space-y-6">
+                  {[1, 2, 3, 4].map((i) => (
+                    <ContactCardSkeleton key={i} />
+                  ))}
+                </div>
+
+                <MapSkeleton />
+                <EmergencyCardSkeleton />
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white">
       <section className="pt-32 pb-20 relative overflow-hidden">
@@ -82,27 +213,9 @@ const ContactPage = () => {
               transform your business.
             </p>
             <div className="inline-flex flex-wrap gap-4 justify-center">
-              <a
-                href="tel:+916289534780"
-                className="inline-flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
-              >
-                <span className="text-xl">📞</span>
-                +91 6289534780
-              </a>
-              <a
-                href="mailto:contact@myeapl.com"
-                className="inline-flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
-              >
-                <span className="text-xl">✉️</span>
-                contact@myeapl.com
-              </a>
-              <a
-                href="mailto:contact@myeapl.com"
-                className="inline-flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
-              >
-                <span className="text-xl">✉️</span>
-                eapl.techhub@gmail.com
-              </a>
+           
+             
+             
             </div>
           </div>
         </div>
@@ -287,21 +400,7 @@ const ContactPage = () => {
                 </div>
               </div>
 
-              <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-6 text-white">
-                <h3 className="text-xl font-bold mb-2">
-                  Need Immediate Assistance?
-                </h3>
-                <p className="mb-4 opacity-90">
-                  Call us directly for urgent inquiries
-                </p>
-                <a
-                  href="tel:+916289534780"
-                  className="inline-flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-lg font-bold hover:bg-blue-50 transition-colors"
-                >
-                  <span className="text-xl">📞</span>
-                  Call Now: +91 6289534780
-                </a>
-              </div>
+             
             </div>
           </div>
         </div>

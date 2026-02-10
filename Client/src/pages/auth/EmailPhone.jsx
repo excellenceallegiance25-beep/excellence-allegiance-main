@@ -9,8 +9,6 @@ const createTransporter = () => {
     },
   });
 };
-
-// For development/testing (without real email)
 const createTestTransporter = () => {
   return {
     sendMail: async (options) => {
@@ -23,15 +21,12 @@ const createTestTransporter = () => {
     },
   };
 };
-
 const transporter =
   process.env.NODE_ENV === "production"
     ? createTransporter()
     : createTestTransporter();
-
 export const sendVerificationEmail = async (email, token, name, role) => {
   const verificationUrl = `${process.env.FRONTEND_URL}/verify-email?token=${token}`;
-
   const mailOptions = {
     from: process.env.EMAIL_FROM || "noreply@yourapp.com",
     to: email,
@@ -64,7 +59,6 @@ export const sendVerificationEmail = async (email, token, name, role) => {
       </div>
     `,
   };
-
   try {
     await transporter.sendMail(mailOptions);
     console.log(`Verification email sent to ${email}`);
@@ -73,7 +67,6 @@ export const sendVerificationEmail = async (email, token, name, role) => {
     throw error;
   }
 };
-
 export const sendWelcomeEmail = async (email, name, role) => {
   const mailOptions = {
     from: process.env.EMAIL_FROM || "noreply@yourapp.com",
@@ -108,7 +101,6 @@ export const sendWelcomeEmail = async (email, name, role) => {
       </div>
     `,
   };
-
   try {
     await transporter.sendMail(mailOptions);
   } catch (error) {

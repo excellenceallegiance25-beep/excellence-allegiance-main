@@ -14,12 +14,12 @@ const AIChatbot = () => {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [companyData, setCompanyData] = useState(null);
-  const [language, setLanguage] = useState("english"); // 'english' or 'bangla'
+  const [language, setLanguage] = useState("english"); 
   const [quickActions, setQuickActions] = useState([
-    { label: "EAPL Stock", query: "EAPL stock price today" },
+    { label: "EAPL Time", query: ".timing in this company" },
     { label: "EAPL CEO", query: "EAPL CEO information" },
     { label: "EAPL Products", query: "EAPL products and services" },
-    { label: "AAPL Stock", query: "AAPL stock price today" },
+    { label: "EAPL Stock", query: "EAPL stock price today" },
     { label: "GOOGL CEO", query: "Google CEO information" },
     { label: "MSFT Revenue", query: "Microsoft revenue 2024" },
   ]);

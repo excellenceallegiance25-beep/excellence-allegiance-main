@@ -5,14 +5,28 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
 
   useEffect(() => {
-    setIsVisible(true);
-    setLastScrollY(0);
-  }, [location]);
+    // Simulate loading
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
+    if (isLoading) return;
+    
+    setIsVisible(true);
+    setLastScrollY(0);
+  }, [location, isLoading]);
+
+  useEffect(() => {
+    if (isLoading) return;
+    
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
@@ -26,7 +40,67 @@ const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, [lastScrollY, isLoading]);
+
+  // Skeleton Components
+  const DesktopNavSkeleton = () => (
+    <div className="hidden md:flex items-center space-x-8">
+      {[1, 2, 3].map((i) => (
+        <div key={i} className="relative">
+          <div className="w-16 h-4 bg-gray-700 rounded animate-pulse"></div>
+        </div>
+      ))}
+      <div className="flex items-center space-x-4 ml-4">
+        <div className="w-20 h-10 bg-gray-700 rounded-xl animate-pulse"></div>
+        <div className="w-24 h-10 bg-gray-700 rounded-xl animate-pulse"></div>
+      </div>
+    </div>
+  );
+
+  const MobileNavSkeleton = () => (
+    <div className="md:hidden flex items-center space-x-3">
+      <div className="w-16 h-8 bg-gray-700 rounded-lg animate-pulse"></div>
+      <div className="w-6 h-6 bg-gray-700 rounded animate-pulse"></div>
+    </div>
+  );
+
+  const LogoLoading = () => (
+    <div className="h-20 w-74 flex-shrink-0">
+      <div className="h-full w-full bg-gradient-to-r from-gray-700 to-gray-600 rounded-lg animate-pulse"></div>
+    </div>
+  );
+
+  const MobileMenuSkeleton = () => (
+    <div className="md:hidden bg-black/90 border-t border-gray-700 py-4">
+      <div className="flex flex-col space-y-4">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <div key={i} className="py-2 px-4">
+            <div className="w-full h-8 bg-gray-700 rounded-lg animate-pulse"></div>
+          </div>
+        ))}
+        <div className="px-4 py-3">
+          <div className="w-full h-12 bg-gray-700 rounded-xl animate-pulse"></div>
+        </div>
+      </div>
+    </div>
+  );
+
+  if (isLoading) {
+    return (
+      <nav className="fixed w-full top-0 z-50 bg-gray-900/80 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center space-x-3">
+              <LogoLoading />
+            </div>
+            <DesktopNavSkeleton />
+            <MobileNavSkeleton />
+          </div>
+          <MobileMenuSkeleton />
+        </div>
+      </nav>
+    );
+  }
 
   return (
     <nav
@@ -37,9 +111,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <Link to="/" className="flex items-center space-x-3">
-            <div className="h-20 w-24 flex-shrink-0">
-              {" "}
-              
+            <div className="h-20 w-74 flex-shrink-0">
               <img
                 src="/eapl.png"
                 alt="Excellence Allegience Logo"
@@ -50,19 +122,8 @@ const Navbar = () => {
                 }}
               />
             </div>
-
-           
-            <div className="text-white font-bold">
-              <h2 className="text-lg md:text-xl leading-tight">
-                EXCELLENCE ALLEGIENCE
-              </h2>
-              <div className="text-xs font-bold mt-0.5">
-                <h2>PVT LTD</h2>
-              </div>
-            </div>
           </Link>
 
-         
           <div className="hidden md:flex items-center space-x-8">
             <Link
               to="/"
@@ -120,7 +181,6 @@ const Navbar = () => {
             </div>
           </div>
 
-         
           <div className="md:hidden flex items-center space-x-3">
             <Link
               to="/login"
@@ -159,7 +219,6 @@ const Navbar = () => {
           </div>
         </div>
 
-       
         {isOpen && (
           <div className="md:hidden bg-black/90 border-t border-gray-700 py-4">
             <div className="flex flex-col space-y-4">

@@ -212,15 +212,7 @@ const Footer = () => {
             <div className="flex items-center space-x-2">
               {/* Small logo in copyright section */}
               <div className="h-18 w-8">
-                <img
-                  src="/eapl.png"
-                  alt="EA Logo"
-                  className="h-full w-full object-contain"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                   
-                  }}
-                />
+                
               </div>
               <div className="text-gray-400 text-sm">
                 &copy; {new Date().getFullYear()} Excellence Allegiance Private

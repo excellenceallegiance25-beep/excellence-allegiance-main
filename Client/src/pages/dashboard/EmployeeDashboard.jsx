@@ -1,318 +1,367 @@
-// pages/employee/Dashboard.jsx
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
-import {
-  Activity,
-  CalendarDays,
-  CheckCircle,
-  Clock,
-  DollarSign,
-  TrendingUp,
-  Users,
-  FileText,
-  Award,
-  Target,
-  BarChart3,
-  Bell,
-  Download,
-  RefreshCw,
-} from "lucide-react";
+﻿// src/pages/dashboard/EmployeeDashboard.jsx
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { 
+  FaUser, FaBell, FaCalendar, FaTasks, 
+  FaChartBar, FaCog, FaSignOutAlt, FaHome,
+  FaUsers, FaFileAlt, FaEnvelope, FaClock
+} from 'react-icons/fa';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
 
 const EmployeeDashboard = () => {
-  const { user } = useAuth();
-  const [stats, setStats] = useState({
-    tasksCompleted: 0,
-    attendance: 0,
-    performance: 0,
-    upcomingMeetings: 0,
-  });
+  const navigate = useNavigate();
+  const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState({
+    tasks: 0,
+    attendance: '0%',
+    projects: 0,
+    messages: 0
+  });
 
   useEffect(() => {
-    fetchEmployeeData();
-  }, []);
-
-  const fetchEmployeeData = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await fetch(
-        "http://192.168.68.109:5000/api/employee/dashboard",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      const data = await response.json();
-      if (data.success) {
-        setStats(data.data.stats);
+    const fetchUserData = async () => {
+      const token = localStorage.getItem('authToken');
+      const savedUser = JSON.parse(localStorage.getItem('user') || '{}');
+      
+      if (!token || !savedUser._id) {
+        navigate('/login');
+        return;
       }
+
+      try {
+        // Fetch user profile
+        const response = await axios.get(`${API_BASE_URL}/auth/me`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (response.data.success) {
+          setUser(response.data.user);
+          localStorage.setItem('user', JSON.stringify(response.data.user));
+          
+          // Fetch dashboard stats
+          fetchDashboardStats(token);
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        if (error.response?.status === 401) {
+          localStorage.removeItem('authToken');
+          localStorage.removeItem('user');
+          navigate('/login');
+          toast.error('Session expired. Please login again.');
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [navigate]);
+
+  const fetchDashboardStats = async (token) => {
+    try {
+      // You can create separate endpoints for these stats
+      const [tasksRes, attendanceRes] = await Promise.all([
+        axios.get(`${API_BASE_URL}/employee/tasks`, {
+          headers: { Authorization: `Bearer ${token}` }
+        }),
+        axios.get(`${API_BASE_URL}/employee/attendance`, {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+      ]);
+
+      setStats({
+        tasks: tasksRes.data.count || 0,
+        attendance: attendanceRes.data.percentage || '0%',
+        projects: 5,
+        messages: 3
+      });
     } catch (error) {
-      console.error("Error fetching dashboard data:", error);
-    } finally {
-      setLoading(false);
+      console.error('Error fetching stats:', error);
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('user');
+    navigate('/login');
+    toast.success('Logged out successfully!');
   };
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading dashboard...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      {/* Welcome Card */}
-      <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-6 text-white">
-        <div className="flex flex-col md:flex-row md:items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold mb-2">
-              Welcome back, {user?.name}! 👋
-            </h1>
-            <p className="text-blue-100">
-              Here's your performance overview for today
-            </p>
-            <div className="flex items-center space-x-4 mt-4">
-              <div className="flex items-center">
-                <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-3">
-                  <span className="text-lg font-bold">
-                    {user?.registrationId}
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center">
+              <img
+                src="/eapl.png"
+                alt="EAPL Logo"
+                className="h-8 w-auto mr-3"
+              />
+              <h1 className="text-xl font-semibold text-gray-900">EAPL Dashboard</h1>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <button className="relative p-2 text-gray-600 hover:text-gray-900">
+                <FaBell size={20} />
+                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+              </button>
+              
+              <div className="relative group">
+                <button className="flex items-center space-x-2">
+                  <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-semibold">
+                    {user.firstName?.[0] || 'U'}
+                  </div>
+                  <div className="text-left">
+                    <p className="text-sm font-medium text-gray-900">
+                      {user.firstName} {user.lastName}
+                    </p>
+                    <p className="text-xs text-gray-500">{user.position}</p>
+                  </div>
+                </button>
+                
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 hidden group-hover:block">
+                  <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <FaUser className="inline mr-2" /> Profile
+                  </button>
+                  <button className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <FaCog className="inline mr-2" /> Settings
+                  </button>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                  >
+                    <FaSignOutAlt className="inline mr-2" /> Logout
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Welcome Section */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-gray-900">
+            Welcome back, {user.firstName}!
+          </h2>
+          <p className="text-gray-600">Here's what's happening today</p>
+        </div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="bg-white rounded-lg shadow p-6">
+            <div className="flex items-center">
+              <div className="p-3 rounded-full bg-blue-100 text-blue-600 mr-4">
+                <FaTasks size={24} />
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">Pending Tasks</p>
+                <p className="text-2xl font-bold">{stats.tasks}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow p-6">
+            <div className="flex items-center">
+              <div className="p-3 rounded-full bg-green-100 text-green-600 mr-4">
+                <FaClock size={24} />
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">Attendance</p>
+                <p className="text-2xl font-bold">{stats.attendance}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow p-6">
+            <div className="flex items-center">
+              <div className="p-3 rounded-full bg-purple-100 text-purple-600 mr-4">
+                <FaFileAlt size={24} />
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">Active Projects</p>
+                <p className="text-2xl font-bold">{stats.projects}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow p-6">
+            <div className="flex items-center">
+              <div className="p-3 rounded-full bg-yellow-100 text-yellow-600 mr-4">
+                <FaEnvelope size={24} />
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">Messages</p>
+                <p className="text-2xl font-bold">{stats.messages}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Column - Quick Actions */}
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-lg shadow p-6 mb-6">
+              <h3 className="text-lg font-semibold mb-4">Quick Actions</h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <button className="p-4 border rounded-lg hover:border-blue-500 hover:bg-blue-50 transition">
+                  <FaTasks className="text-blue-600 mb-2 mx-auto" size={24} />
+                  <p className="text-sm font-medium">Submit Task</p>
+                </button>
+                <button className="p-4 border rounded-lg hover:border-green-500 hover:bg-green-50 transition">
+                  <FaCalendar className="text-green-600 mb-2 mx-auto" size={24} />
+                  <p className="text-sm font-medium">Mark Attendance</p>
+                </button>
+                <button className="p-4 border rounded-lg hover:border-purple-500 hover:bg-purple-50 transition">
+                  <FaFileAlt className="text-purple-600 mb-2 mx-auto" size={24} />
+                  <p className="text-sm font-medium">Create Report</p>
+                </button>
+                <button className="p-4 border rounded-lg hover:border-red-500 hover:bg-red-50 transition">
+                  <FaEnvelope className="text-red-600 mb-2 mx-auto" size={24} />
+                  <p className="text-sm font-medium">Send Message</p>
+                </button>
+                <button className="p-4 border rounded-lg hover:border-yellow-500 hover:bg-yellow-50 transition">
+                  <FaChartBar className="text-yellow-600 mb-2 mx-auto" size={24} />
+                  <p className="text-sm font-medium">View Analytics</p>
+                </button>
+                <button className="p-4 border rounded-lg hover:border-indigo-500 hover:bg-indigo-50 transition">
+                  <FaUsers className="text-indigo-600 mb-2 mx-auto" size={24} />
+                  <p className="text-sm font-medium">Team Chat</p>
+                </button>
+              </div>
+            </div>
+
+            {/* Recent Activities */}
+            <div className="bg-white rounded-lg shadow p-6">
+              <h3 className="text-lg font-semibold mb-4">Recent Activities</h3>
+              <div className="space-y-4">
+                {[
+                  { action: 'Task completed', project: 'Project Alpha', time: '2 hours ago' },
+                  { action: 'Attendance marked', project: 'Today', time: '4 hours ago' },
+                  { action: 'Report submitted', project: 'Q4 Review', time: '1 day ago' },
+                  { action: 'Message received', project: 'Team Update', time: '2 days ago' }
+                ].map((activity, index) => (
+                  <div key={index} className="flex items-center p-3 hover:bg-gray-50 rounded">
+                    <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+                    <div className="flex-1">
+                      <p className="font-medium">{activity.action}</p>
+                      <p className="text-sm text-gray-500">{activity.project}</p>
+                    </div>
+                    <span className="text-sm text-gray-400">{activity.time}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column - Upcoming Tasks & Profile */}
+          <div className="space-y-6">
+            {/* Profile Card */}
+            <div className="bg-white rounded-lg shadow p-6">
+              <h3 className="text-lg font-semibold mb-4">Your Profile</h3>
+              <div className="text-center mb-4">
+                <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-3">
+                  {user.firstName?.[0] || 'U'}
+                </div>
+                <h4 className="font-bold text-lg">{user.firstName} {user.lastName}</h4>
+                <p className="text-gray-600">{user.position}</p>
+                <p className="text-sm text-gray-500">{user.department}</p>
+              </div>
+              
+              <div className="space-y-3">
+                <div className="flex justify-between">
+                  <span className="text-gray-500">Employee ID</span>
+                  <span className="font-medium">{user.employeeId}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-500">Email</span>
+                  <span className="font-medium">{user.email}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-500">Phone</span>
+                  <span className="font-medium">{user.phone}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-500">Status</span>
+                  <span className={`px-2 py-1 rounded text-xs font-medium ${
+                    user.status === 'active' ? 'bg-green-100 text-green-800' :
+                    user.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                    'bg-red-100 text-red-800'
+                  }`}>
+                    {user.status?.charAt(0).toUpperCase() + user.status?.slice(1)}
                   </span>
                 </div>
-                <div>
-                  <p className="text-sm opacity-90">Employee ID</p>
-                  <p className="font-semibold">{user?.registrationId}</p>
-                </div>
-              </div>
-              <div className="flex items-center">
-                <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-3">
-                  <Users size={20} />
-                </div>
-                <div>
-                  <p className="text-sm opacity-90">Department</p>
-                  <p className="font-semibold">{user?.department}</p>
-                </div>
               </div>
             </div>
-          </div>
-          <div className="mt-4 md:mt-0">
-            <button className="px-4 py-2 bg-white text-blue-600 rounded-lg font-medium hover:bg-blue-50 transition-colors">
-              View Full Profile
-            </button>
-          </div>
-        </div>
-      </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Tasks Completed
-              </p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
-                {stats.tasksCompleted}/15
-              </p>
-              <p className="text-sm text-green-600 dark:text-green-400 mt-1">
-                <TrendingUp size={14} className="inline mr-1" />
-                12% from last week
-              </p>
-            </div>
-            <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-              <CheckCircle
-                className="text-blue-600 dark:text-blue-400"
-                size={24}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Attendance
-              </p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
-                {stats.attendance}%
-              </p>
-              <p className="text-sm text-green-600 dark:text-green-400 mt-1">
-                <Clock size={14} className="inline mr-1" />
-                Perfect this month
-              </p>
-            </div>
-            <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-lg">
-              <Clock className="text-green-600 dark:text-green-400" size={24} />
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Performance
-              </p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
-                {stats.performance}%
-              </p>
-              <p className="text-sm text-green-600 dark:text-green-400 mt-1">
-                <TrendingUp size={14} className="inline mr-1" />
-                Excellent rating
-              </p>
-            </div>
-            <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
-              <Activity
-                className="text-purple-600 dark:text-purple-400"
-                size={24}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Upcoming Meetings
-              </p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
-                {stats.upcomingMeetings}
-              </p>
-              <p className="text-sm text-blue-600 dark:text-blue-400 mt-1">
-                <CalendarDays size={14} className="inline mr-1" />
-                Next: Today 2 PM
-              </p>
-            </div>
-            <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
-              <CalendarDays
-                className="text-orange-600 dark:text-orange-400"
-                size={24}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Quick Actions */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            Quick Actions
-          </h3>
-          <div className="grid grid-cols-2 gap-4">
-            <Link
-              to="/employee/attendance"
-              className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
-            >
-              <Clock
-                className="text-blue-600 dark:text-blue-400 mb-2"
-                size={24}
-              />
-              <p className="font-medium text-gray-900 dark:text-white">
-                Mark Attendance
-              </p>
-            </Link>
-            <Link
-              to="/employee/tasks"
-              className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg hover:bg-green-100 dark:hover:bg-green-900/30 transition-colors"
-            >
-              <CheckCircle
-                className="text-green-600 dark:text-green-400 mb-2"
-                size={24}
-              />
-              <p className="font-medium text-gray-900 dark:text-white">
-                View Tasks
-              </p>
-            </Link>
-            <Link
-              to="/employee/payroll"
-              className="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors"
-            >
-              <DollarSign
-                className="text-purple-600 dark:text-purple-400 mb-2"
-                size={24}
-              />
-              <p className="font-medium text-gray-900 dark:text-white">
-                Payroll
-              </p>
-            </Link>
-            <Link
-              to="/employee/documents"
-              className="p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg hover:bg-orange-100 dark:hover:bg-orange-900/30 transition-colors"
-            >
-              <FileText
-                className="text-orange-600 dark:text-orange-400 mb-2"
-                size={24}
-              />
-              <p className="font-medium text-gray-900 dark:text-white">
-                Documents
-              </p>
-            </Link>
-          </div>
-        </div>
-
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            Recent Activities
-          </h3>
-          <div className="space-y-4">
-            {[
-              {
-                title: "Task Completed",
-                desc: "Website redesign task",
-                time: "2 hours ago",
-                color: "green",
-              },
-              {
-                title: "Attendance Marked",
-                desc: "Check-in at 9:00 AM",
-                time: "Today",
-                color: "blue",
-              },
-              {
-                title: "Document Uploaded",
-                desc: "Monthly report.pdf",
-                time: "Yesterday",
-                color: "purple",
-              },
-              {
-                title: "Meeting Scheduled",
-                desc: "Team sync-up at 3 PM",
-                time: "Tomorrow",
-                color: "orange",
-              },
-            ].map((activity, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-lg"
-              >
-                <div className="flex items-center">
-                  <div
-                    className={`w-2 h-2 rounded-full bg-${activity.color}-500 mr-3`}
-                  ></div>
-                  <div>
-                    <p className="font-medium text-gray-900 dark:text-white">
-                      {activity.title}
-                    </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      {activity.desc}
-                    </p>
+            {/* Upcoming Tasks */}
+            <div className="bg-white rounded-lg shadow p-6">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold">Upcoming Tasks</h3>
+                <span className="text-sm text-blue-600">View all</span>
+              </div>
+              <div className="space-y-3">
+                {[
+                  { task: 'Complete Q4 Report', due: 'Today', priority: 'high' },
+                  { task: 'Team Meeting', due: 'Tomorrow', priority: 'medium' },
+                  { task: 'Client Presentation', due: 'Dec 20', priority: 'high' },
+                  { task: 'Training Session', due: 'Dec 22', priority: 'low' }
+                ].map((task, index) => (
+                  <div key={index} className="p-3 border rounded-lg hover:border-blue-300 transition">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <p className="font-medium">{task.task}</p>
+                        <p className="text-sm text-gray-500">Due: {task.due}</p>
+                      </div>
+                      <span className={`px-2 py-1 rounded text-xs ${
+                        task.priority === 'high' ? 'bg-red-100 text-red-800' :
+                        task.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
+                        'bg-green-100 text-green-800'
+                      }`}>
+                        {task.priority}
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <span className="text-sm text-gray-500 dark:text-gray-400">
-                  {activity.time}
-                </span>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="bg-white border-t mt-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="flex items-center mb-4 md:mb-0">
+              <img src="/eapl.png" alt="EAPL" className="h-6 w-auto mr-2" />
+              <p className="text-gray-600">Employee Assistance & Productivity Ltd.</p>
+            </div>
+            <div className="text-sm text-gray-500">
+              © {new Date().getFullYear()} EAPL Technologies. All rights reserved.
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
