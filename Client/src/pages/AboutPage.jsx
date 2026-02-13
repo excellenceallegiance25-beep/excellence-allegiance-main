@@ -59,39 +59,27 @@ const AboutPage = () => {
   const clientIndustries = [
     {
       name: "Healthcare",
-
-      count: "12+",
-      color: "bg-red-500/10 text-red-600",
+      
     },
     {
       name: "Finance",
-
-      count: "8+",
-      color: "bg-green-500/10 text-green-600",
+      
     },
     {
       name: "E-commerce",
-
-      count: "15+",
-      color: "bg-blue-500/10 text-blue-600",
+     
     },
     {
       name: "Education",
-
-      count: "10+",
-      color: "bg-purple-500/10 text-purple-600",
+      
     },
     {
       name: "Manufacturing",
-
-      count: "7+",
-      color: "bg-orange-500/10 text-orange-600",
+     
     },
     {
       name: "Startups",
-
-      count: "20+",
-      color: "bg-cyan-500/10 text-cyan-600",
+      
     },
   ];
 
@@ -147,34 +135,27 @@ const AboutPage = () => {
   const developmentProcess = [
     {
       title: "Discovery & Analysis",
-      description: "In-depth requirement gathering and feasibility study",
-      color: "bg-blue-500",
+      description: "In-depth requirement gathering and feasibility study", 
     },
     {
       title: "Strategy & Planning",
-      description: "Architecture design and project roadmap creation",
-      color: "bg-purple-500",
+      description: "Architecture design and project roadmap creation",     
     },
     {
       title: "Development",
-      description: "Agile sprints with continuous integration",
-      color: "bg-green-500",
+      description: "Agile sprints with continuous integration",    
     },
     {
       title: "Quality Assurance",
-      description: "Comprehensive testing and security audits",
-      color: "bg-yellow-500",
+      description: "Comprehensive testing and security audits",    
     },
     {
       title: "Deployment",
       description: "Production deployment with CI/CD pipeline",
-      color: "bg-orange-500",
     },
     {
       title: "Support & Optimization",
       description: "Ongoing maintenance and performance tuning",
-
-      color: "bg-cyan-500",
     },
   ];
 
@@ -310,12 +291,8 @@ const AboutPage = () => {
             </div>
 
             <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25">
-                Get in Touch
-              </button>
-              <button className="px-8 py-3 bg-gray-800/50 backdrop-blur-sm border border-gray-700 text-gray-300 font-semibold rounded-lg hover:border-cyan-500/50 hover:text-cyan-400 transition-all">
-                View Our Work
-              </button>
+              
+             
             </div>
           </div>
         </div>
@@ -515,7 +492,7 @@ const AboutPage = () => {
                   {industry.name}
                 </h3>
                 <div className={`text-sm ${industry.color} font-semibold`}>
-                  {industry.count} Projects
+                  {industry.count} 
                 </div>
               </div>
             ))}

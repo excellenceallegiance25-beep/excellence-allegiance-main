@@ -11,7 +11,7 @@ import { AuthProvider, useAuth } from "./contexts/AuthContext";
 // Public Pages
 import Home from "./pages/Home";
 import About from "./pages/AboutPage";
-import Services from "./pages/Ourservice";
+import Services from "./pages/Ourservice.jsx";
 import Contact from "./pages/ContactPage";
 import FAQ from "./pages/FAQPage";
 import TestPage from "./pages/TestPage";

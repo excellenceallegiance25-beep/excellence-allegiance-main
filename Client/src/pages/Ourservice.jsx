@@ -227,7 +227,7 @@ const OurService = () => {
       {
         id: "bkash",
         name: "bKash",
-        icon: "💰",
+        
         type: "Mobile Banking",
         account: "017XXXXXXXX",
         instructions:
@@ -236,7 +236,7 @@ const OurService = () => {
       {
         id: "nagad",
         name: "Nagad",
-        icon: "💳",
+       
         type: "Mobile Banking",
         account: "013XXXXXXXX",
         instructions: "Send money to this Nagad number and keep transaction ID",
@@ -244,7 +244,7 @@ const OurService = () => {
       {
         id: "rocket",
         name: "Rocket",
-        icon: "🚀",
+        
         type: "Mobile Banking",
         account: "015XXXXXXXX",
         instructions: "Send money via Rocket and note transaction ID",
@@ -252,7 +252,7 @@ const OurService = () => {
       {
         id: "stripe",
         name: "Stripe",
-        icon: "💳",
+      
         type: "Card Payment",
         account: "Visa/MasterCard/American Express",
         instructions: "Secure online payment with credit/debit cards",
@@ -260,7 +260,7 @@ const OurService = () => {
       {
         id: "paypal",
         name: "PayPal",
-        icon: "🌐",
+       
         type: "Online Payment",
         account: "paypal.me/yourusername",
         instructions: "Send payment through PayPal secure gateway",
@@ -268,7 +268,7 @@ const OurService = () => {
       {
         id: "bank",
         name: "Bank Transfer",
-        icon: "🏦",
+        
         type: "Bank Account",
         account: "Bank: XXXX, Account: XXXXXXX",
         instructions: "Wire transfer to our bank account",
@@ -283,7 +283,7 @@ const OurService = () => {
         id: 1,
         title: "Custom Web Development",
         category: "development",
-        icon: "💻",
+        
         description:
           "Responsive websites & web applications with modern frameworks",
         features: [
@@ -330,7 +330,7 @@ const OurService = () => {
         id: 2,
         title: "Mobile App Development",
         category: "mobile",
-        icon: "📱",
+      
         description: "Cross-platform mobile apps for iOS & Android",
         features: [
           "React Native/Flutter",
@@ -399,7 +399,7 @@ const OurService = () => {
         id: 4,
         title: "Cloud & DevOps",
         category: "cloud",
-        icon: "☁️",
+      
         description: "Cloud infrastructure & deployment automation",
         features: [
           "AWS/Azure/GCP",
@@ -430,7 +430,7 @@ const OurService = () => {
         id: 5,
         title: "AI/ML Solutions",
         category: "ai",
-        icon: "🤖",
+        
         description: "Artificial Intelligence & Machine Learning development",
         features: [
           "Predictive Analytics",
@@ -463,7 +463,7 @@ const OurService = () => {
         id: 6,
         title: "UI/UX Design",
         category: "design",
-        icon: "🎨",
+      
         description: "User-centered design for digital products",
         features: [
           "Wireframing",
@@ -501,7 +501,7 @@ const OurService = () => {
       {
         step: 1,
         title: "Discovery & Planning",
-        icon: "🔍",
+       
         description:
           "Requirements gathering, project scope, and roadmap creation",
         duration: "1-2 weeks",
@@ -510,7 +510,7 @@ const OurService = () => {
       {
         step: 2,
         title: "Design & Prototyping",
-        icon: "🎨",
+       
         description: "UI/UX design, user flows, and interactive prototypes",
         duration: "2-3 weeks",
         deliverables: ["Design mockups", "Prototype", "Style guide"],
@@ -518,7 +518,7 @@ const OurService = () => {
       {
         step: 3,
         title: "Development",
-        icon: "💻",
+       
         description: "Agile development with weekly sprints and demos",
         duration: "4-12 weeks",
         deliverables: ["Weekly updates", "Testable features", "Code reviews"],
@@ -526,7 +526,7 @@ const OurService = () => {
       {
         step: 4,
         title: "Testing & QA",
-        icon: "🧪",
+       
         description:
           "Comprehensive testing including functional, performance, and security",
         duration: "1-3 weeks",
@@ -535,7 +535,7 @@ const OurService = () => {
       {
         step: 5,
         title: "Deployment",
-        icon: "🚀",
+        
         description: "Production deployment and launch preparation",
         duration: "1 week",
         deliverables: ["Live deployment", "Documentation", "Training"],
@@ -549,32 +549,32 @@ const OurService = () => {
       {
         category: "Frontend",
         techs: ["React", "Next.js", "Vue.js", "Angular", "TypeScript"],
-        icon: "⚡",
+        
       },
       {
         category: "Backend",
         techs: ["Node.js", "Python", "Java", ".NET", "PHP"],
-        icon: "🔧",
+       
       },
       {
         category: "Mobile",
         techs: ["React Native", "Flutter", "iOS Swift", "Android Kotlin"],
-        icon: "📱",
+      
       },
       {
         category: "Database",
         techs: ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Firebase"],
-        icon: "🗃️",
+       
       },
       {
         category: "Cloud",
         techs: ["AWS", "Azure", "Google Cloud", "Docker", "Kubernetes"],
-        icon: "☁️",
+      
       },
       {
         category: "AI/ML",
         techs: ["TensorFlow", "PyTorch", "OpenCV", "Scikit-learn", "FastAPI"],
-        icon: "🤖",
+      
       },
     ],
     [],
@@ -1342,141 +1342,41 @@ const OurService = () => {
                   For Digital Transformation
                 </span>
               </h1>
-
-              <div className="text-xl md:text-1xl text-gray-200 leading-relaxed max-w-2xl">
+              <div className="text-xm md:text-1xl text-gray-200 leading-relaxed max-w-2xl">
                 Transform uncertainty into competitive advantage with EAPL's
                 future-proof solutions. We equip businesses with adaptive
                 technologies that evolve with market demands, ensuring you're
                 always ahead of the curve.
               </div>
-
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-6">
-                <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-2">
-                    150+
-                  </div>
-                  <div className="text-sm text-gray-300">
-                    Projects Completed
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">
-                    50+
-                  </div>
-                  <div className="text-sm text-gray-300">Happy Clients</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-purple-400 mb-2">
-                    10+
-                  </div>
-                  <div className="text-sm text-gray-300">Years Experience</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-green-400 mb-2">
-                    99%
-                  </div>
-                  <div className="text-sm text-gray-300">Satisfaction Rate</div>
-                </div>
               </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                <Link
-                  to="/contact"
-                  className="group relative bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl flex items-center justify-center overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-                  <svg
-                    className="w-6 h-6 mr-3 group-hover:rotate-12 transition-transform"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                    />
-                  </svg>
-                  Start Your Journey
-                </Link>
+              <div className="flex flex-col sm:flex-row gap-4 pt-6">               
               </div>
             </div>
-
-            <div className="relative">
+           <div className="relative">
               <div className="relative w-full max-w-lg mx-auto">
                 <div className="absolute -top-10 -right-10 w-72 h-72 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-gradient-to-tr from-purple-500/10 to-pink-500/10 rounded-full blur-3xl animate-pulse"></div>
-
-                <div className="relative rounded-3xl overflow-hidden border-8 border-white/10 backdrop-blur-sm bg-gradient-to-br from-gray-800/30 to-gray-900/50 p-2 shadow-2xl">
-                  <div className="absolute inset-0 opacity-10">
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        backgroundImage: `radial-gradient(circle at 2px 2px, #3b82f6 1px, transparent 0)`,
-                        backgroundSize: "40px 40px",
-                      }}
-                    ></div>
-                  </div>
-
-                  <div className="relative rounded-2xl overflow-hidden">
-                    <div className="w-full h-[500px] bg-gradient-to-br from-cyan-500/20 via-blue-500/20 to-purple-500/20 flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="text-6xl mb-4">👨‍💻</div>
-                        <p className="text-white text-lg">Your Image Here</p>
-                        <p className="text-gray-300 text-sm">
-                          Professional tech profile photo
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2"></div>
+                  <div className="relative -mt-20"> 
+                        <p className="text-white text-lg "> <div>
+                        <img 
+                          src="/ai human.png" 
+                          alt="Profile"
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236b7280'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E";
+                          }}
+                        />
+                      </div></p>
                 </div>
-
-                <div className="absolute -top-6 -left-6 animate-float-slow">
-                  <div className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 backdrop-blur-sm rounded-2xl p-4 border border-blue-500/30 shadow-xl">
-                    <div className="flex items-center gap-3">
-                      <div className="text-2xl">⚡</div>
-                      <div>
-                        <div className="text-sm font-bold">Fast Delivery</div>
-                        <div className="text-xs text-gray-300">30% Faster</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
                 <div className="absolute top-1/3 -right-8 animate-float-fast">
-                  <div className="bg-gradient-to-br from-emerald-500/20 to-green-500/20 backdrop-blur-sm rounded-2xl p-4 border border-emerald-500/30 shadow-xl">
-                    <div className="flex items-center gap-3">
-                      <div className="text-2xl">💰</div>
-                      <div>
-                        <div className="text-sm font-bold">Best Price</div>
-                        <div className="text-xs text-gray-300">Guaranteed</div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-          <div className="animate-bounce">
-            <svg
-              className="w-8 h-8 text-cyan-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-              />
-            </svg>
-          </div>
+          
         </div>
       </section>
 
@@ -1490,306 +1390,200 @@ const OurService = () => {
             darkMode ? "border-gray-700/50" : "border-white/30"
           }`}
         >
-          <section id="services" className="py-20">
-            <div className="text-center mb-16">
-              <div
-                className={`inline-flex items-center gap-2 ${
-                  darkMode
-                    ? "bg-gray-700/50"
-                    : "bg-gradient-to-r from-cyan-50 to-blue-50"
-                } px-4 py-2 rounded-full mb-6`}
-              >
-                <div className="w-2 h-2 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"></div>
-                <span className="text-sm font-medium text-gradient bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
-                  Our Expertise
-                </span>
-              </div>
-              <h2
-                className={`text-4xl md:text-5xl font-bold mb-6 ${
-                  darkMode ? "text-white" : "text-gray-900"
-                }`}
-              >
-                Comprehensive{" "}
-                <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                  IT Services
-                </span>
-              </h2>
-              <p
-                className={`text-xl ${
-                  darkMode ? "text-gray-300" : "text-gray-600"
-                } max-w-3xl mx-auto`}
-              >
-                We provide end-to-end technology solutions tailored to your
-                business needs
-              </p>
-            </div>
+         {/* What The Customer Gets Section - Image Style */}
+<section className="py-20 relative overflow-hidden">
+  {/* Background Effects */}
+  <div className="absolute inset-0 z-0">
+    <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-cyan-500/5 to-blue-500/5 rounded-full blur-3xl"></div>
+    <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tr from-purple-500/5 to-pink-500/5 rounded-full blur-3xl"></div>
+  </div>
 
-            <div className="mb-12">
-              <div className="relative max-w-xl mx-auto mb-8">
-                <input
-                  type="text"
-                  placeholder="Search services (e.g., 'React', 'E-commerce', 'Mobile')..."
-                  value={searchQuery}
-                  onChange={handleSearchChange}
-                  className={`w-full px-6 py-4 pl-12 rounded-xl focus:outline-none transition-all text-base shadow-sm backdrop-blur-sm ${
-                    darkMode
-                      ? "bg-gray-700/50 border-gray-600 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-white placeholder-gray-400"
-                      : "bg-white/80 border-gray-300 focus:border-blue-500 focus:ring-3 focus:ring-blue-200 text-gray-900"
-                  }`}
-                />
-                <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
-                  <svg
-                    className="w-5 h-5 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
-                </div>
-                {searchQuery && (
-                  <button
-                    onClick={handleClearSearch}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                  >
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                )}
-              </div>
+  <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Header */}
+    <div className="text-center mb-16">
+      <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${
+        darkMode ? "text-white" : "text-gray-900"
+      }`}>
+        WHAT THE{" "}
+        <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+          CUSTOMER GETS
+        </span>
+      </h2>
+      <p className={`text-xl ${
+        darkMode ? "text-gray-300" : "text-gray-600"
+      } max-w-3xl mx-auto`}>
+        We provide end-to-end technology solutions tailored to your business needs
+      </p>
+    </div>
 
-              <div className="flex flex-wrap justify-center gap-3 mb-8">
-                {filters.map((filter) => (
-                  <button
-                    key={filter.key}
-                    onClick={() => handleFilterClick(filter.key)}
-                    className={`px-5 py-2.5 rounded-lg font-medium transition-all duration-200 ${
-                      darkMode ? "hover:bg-gray-700/50" : "hover:bg-gray-50"
-                    } ${
-                      activeFilter === filter.key
-                        ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg transform scale-105"
-                        : darkMode
-                          ? "bg-gray-800 text-gray-300 border border-gray-700"
-                          : "bg-white text-gray-700 border border-gray-200"
-                    }`}
-                  >
-                    {filter.label}
-                  </button>
-                ))}
-              </div>
-            </div>
+    {/* Main Grid - 4 Columns Exactly Like Image */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      
+      {/* Card 01 - CUSTOMER PRIORITY */}
+      <div className="group relative">
+        {/* 3D Card Effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        
+        <div className={`relative h-full rounded-3xl p-8 ${
+          darkMode 
+            ? "bg-gray-800/90 border-gray-700" 
+            : "bg-white border-gray-100"
+        } border backdrop-blur-sm transform transition-all duration-500 group-hover:scale-105 group-hover:-translate-y-2`}
+        style={{
+          boxShadow: darkMode 
+            ? '0 20px 40px -15px rgba(0,0,0,0.3)' 
+            : '0 20px 40px -15px rgba(0,0,0,0.1)'
+        }}>
+          
+          {/* Number Badge - 01 */}
+          <div className="absolute top-6 right-6">
+            <span className={`text-6xl font-black ${
+              darkMode ? "text-gray-700" : "text-gray-200"
+            }`}>01</span>
+          </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-              {filteredServices.map((service) => (
-                <div
-                  key={service.id}
-                  className={`rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group border ${
-                    darkMode
-                      ? "bg-gray-800/50 border-gray-700 hover:border-cyan-500/30"
-                      : "bg-white border-gray-100 hover:border-blue-200"
-                  }`}
-                >
-                  <div className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-center space-x-4">
-                        <div className="text-3xl transform group-hover:scale-110 transition-transform duration-300">
-                          {service.icon}
-                        </div>
-                        <div>
-                          <h3
-                            className={`text-lg font-bold mb-1 group-hover:text-cyan-500 transition-colors ${
-                              darkMode ? "text-white" : "text-gray-900"
-                            }`}
-                          >
-                            {service.title}
-                          </h3>
-                          <p
-                            className={`text-sm ${
-                              darkMode ? "text-gray-400" : "text-gray-600"
-                            }`}
-                          >
-                            {service.description}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex items-center">
-                        <span className="text-sm font-semibold text-amber-500 mr-1">
-                          {service.rating}
-                        </span>
-                        <svg
-                          className="w-4 h-4 text-amber-500"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      </div>
-                    </div>
+          {/* Content */}
+          <div className="relative z-10">
+            <h3 className={`text-2xl font-bold mb-4 ${
+              darkMode ? "text-white" : "text-gray-900"
+            }`}>
+              CUSTOMER<br />PRIORITY
+            </h3>
+            
+            <p className={`text-base leading-relaxed ${
+              darkMode ? "text-gray-300" : "text-gray-600"
+            }`}>
+              The designer is always on the side of the customer
+            </p>
 
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {service.technologies.slice(0, 3).map((tech, index) => (
-                        <span
-                          key={index}
-                          className={`text-xs px-2 py-1 rounded-full ${
-                            darkMode
-                              ? "bg-gray-700 text-gray-300"
-                              : "bg-blue-50 text-blue-700"
-                          }`}
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                      {service.technologies.length > 3 && (
-                        <span
-                          className={`text-xs px-2 py-1 rounded-full ${
-                            darkMode
-                              ? "bg-gray-700 text-gray-400"
-                              : "bg-gray-100 text-gray-600"
-                          }`}
-                        >
-                          +{service.technologies.length - 3}
-                        </span>
-                      )}
-                    </div>
+            {/* Hover Effect Line */}
+            <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 group-hover:w-full transition-all duration-500"></div>
+          </div>
+        </div>
+      </div>
 
-                    <div className="space-y-2 mb-4">
-                      {service.features.slice(0, 2).map((feature, index) => (
-                        <div
-                          key={index}
-                          className={`flex items-center text-sm ${
-                            darkMode ? "text-gray-400" : "text-gray-600"
-                          }`}
-                        >
-                          <svg
-                            className="w-4 h-4 text-green-500 mr-2 flex-shrink-0"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          <span>{feature}</span>
-                        </div>
-                      ))}
-                    </div>
+      {/* Card 02 - TIME SAVING */}
+      <div className="group relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        
+        <div className={`relative h-full rounded-3xl p-8 ${
+          darkMode 
+            ? "bg-gray-800/90 border-gray-700" 
+            : "bg-white border-gray-100"
+        } border backdrop-blur-sm transform transition-all duration-500 group-hover:scale-105 group-hover:-translate-y-2`}
+        style={{
+          boxShadow: darkMode 
+            ? '0 20px 40px -15px rgba(0,0,0,0.3)' 
+            : '0 20px 40px -15px rgba(0,0,0,0.1)'
+        }}>
+          
+          <div className="absolute top-6 right-6">
+            <span className={`text-6xl font-black ${
+              darkMode ? "text-gray-700" : "text-gray-200"
+            }`}>02</span>
+          </div>
 
-                    <div className="grid grid-cols-2 gap-3 mb-6">
-                      <div
-                        className={`rounded-lg p-3 ${
-                          darkMode ? "bg-gray-700/30" : "bg-blue-50"
-                        }`}
-                      >
-                        <div
-                          className={`text-xs ${
-                            darkMode ? "text-gray-400" : "text-gray-600"
-                          } mb-1`}
-                        >
-                          Timeline
-                        </div>
-                        <div className="text-sm font-bold text-cyan-500">
-                          {service.timeline}
-                        </div>
-                      </div>
-                      <div
-                        className={`rounded-lg p-3 ${
-                          darkMode ? "bg-gray-700/30" : "bg-emerald-50"
-                        }`}
-                      >
-                        <div
-                          className={`text-xs ${
-                            darkMode ? "text-gray-400" : "text-gray-600"
-                          } mb-1`}
-                        >
-                          Starting from
-                        </div>
-                        <div className="text-sm font-bold text-emerald-500">
-                          {service.pricing.project}
-                        </div>
-                      </div>
-                    </div>
+          <div className="relative z-10">
+            <h3 className={`text-2xl font-bold mb-4 ${
+              darkMode ? "text-white" : "text-gray-900"
+            }`}>
+              TIME<br />SAVING
+            </h3>
+            
+            <p className={`text-base leading-relaxed ${
+              darkMode ? "text-gray-300" : "text-gray-600"
+            }`}>
+              Saving time and nerves, since construction is a troublesome business, executors have a lot of questions that, in the absence of author's support, they will ask the customer
+            </p>
 
-                    <div className="flex space-x-3">
-                      <button
-                        onClick={() => openServiceModal(service)}
-                        className="flex-1 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white py-2 px-4 rounded-lg font-medium text-sm transition-all duration-300 transform hover:scale-105 text-center"
-                      >
-                        View Details
-                      </button>
-                      <Link
-                        to="/contact"
-                        state={{ service: service.title }}
-                        className={`flex-1 border-2 text-center py-2 px-4 rounded-lg font-medium text-sm transition-all duration-300 ${
-                          darkMode
-                            ? "border-cyan-500 text-cyan-500 hover:bg-cyan-500/10"
-                            : "border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
-                        }`}
-                      >
-                        Get Quote
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 group-hover:w-full transition-all duration-500"></div>
+          </div>
+        </div>
+      </div>
 
-            {filteredServices.length === 0 && (
-              <div className="text-center py-16">
-                <div className="text-5xl mb-6">🔍</div>
-                <h3
-                  className={`text-xl font-bold mb-4 ${
-                    darkMode ? "text-white" : "text-gray-900"
-                  }`}
-                >
-                  No services found
-                </h3>
-                <p
-                  className={`text-lg mb-8 max-w-md mx-auto ${
-                    darkMode ? "text-gray-400" : "text-gray-600"
-                  }`}
-                >
-                  Try selecting a different category or adjusting your search
-                  terms
-                </p>
-                <div className="flex gap-4 justify-center">
-                  <button
-                    onClick={() => setActiveFilter("all")}
-                    className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-6 py-2 rounded-lg font-medium transition-all duration-300"
-                  >
-                    View All Services
-                  </button>
-                  <button
-                    onClick={handleClearSearch}
-                    className={`border-2 px-6 py-2 rounded-lg font-medium transition-colors duration-300 ${
-                      darkMode
-                        ? "border-gray-600 text-gray-300 hover:bg-gray-700"
-                        : "border-gray-300 text-gray-700 hover:bg-gray-50"
-                    }`}
-                  >
-                    Clear Search
-                  </button>
-                </div>
-              </div>
-            )}
-          </section>
+      {/* Card 03 - COST SAVINGS */}
+      <div className="group relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        
+        <div className={`relative h-full rounded-3xl p-8 ${
+          darkMode 
+            ? "bg-gray-800/90 border-gray-700" 
+            : "bg-white border-gray-100"
+        } border backdrop-blur-sm transform transition-all duration-500 group-hover:scale-105 group-hover:-translate-y-2`}
+        style={{
+          boxShadow: darkMode 
+            ? '0 20px 40px -15px rgba(0,0,0,0.3)' 
+            : '0 20px 40px -15px rgba(0,0,0,0.1)'
+        }}>
+          
+          <div className="absolute top-6 right-6">
+            <span className={`text-6xl font-black ${
+              darkMode ? "text-gray-700" : "text-gray-200"
+            }`}>03</span>
+          </div>
+
+          <div className="relative z-10">
+            <h3 className={`text-2xl font-bold mb-4 ${
+              darkMode ? "text-white" : "text-gray-900"
+            }`}>
+              COST<br />SAVINGS
+            </h3>
+            
+            <p className={`text-base leading-relaxed ${
+              darkMode ? "text-gray-300" : "text-gray-600"
+            }`}>
+              Cost reduction: Author's support allows you to prevent errors in time and monitor the consumption of materials
+            </p>
+
+            <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 group-hover:w-full transition-all duration-500"></div>
+          </div>
+        </div>
+      </div>
+
+      {/* Card 04 - DESIGN SUPERVISION OF BUILDERS */}
+      <div className="group relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        
+        <div className={`relative h-full rounded-3xl p-8 ${
+          darkMode 
+            ? "bg-gray-800/90 border-gray-700" 
+            : "bg-white border-gray-100"
+        } border backdrop-blur-sm transform transition-all duration-500 group-hover:scale-105 group-hover:-translate-y-2`}
+        style={{
+          boxShadow: darkMode 
+            ? '0 20px 40px -15px rgba(0,0,0,0.3)' 
+            : '0 20px 40px -15px rgba(0,0,0,0.1)'
+        }}>
+          
+          <div className="absolute top-6 right-6">
+            <span className={`text-6xl font-black ${
+              darkMode ? "text-gray-700" : "text-gray-200"
+            }`}>04</span>
+          </div>
+
+          <div className="relative z-10">
+            <h3 className={`text-2xl font-bold mb-4 ${
+              darkMode ? "text-white" : "text-gray-900"
+            }`}>
+              DESIGN<br />SUPERVISION<br />OF BUILDERS
+            </h3>
+            
+            <p className={`text-base leading-relaxed ${
+              darkMode ? "text-gray-300" : "text-gray-600"
+            }`}>
+              The designer will independently defend the artistic concept and prevent simplification of the project, as well as "author's surprises" from builders or foreman
+            </p>
+
+            <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 group-hover:w-full transition-all duration-500"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+ 
+   
+  </div>
+</section>
 
           <section className="py-20 border-t border-gray-700/30">
             <div className="text-center mb-16">

@@ -825,7 +825,7 @@ const Home = () => {
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            Excellence Allegiance
+            Excellence Allegiance 
           </h1>
 
           <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto">
